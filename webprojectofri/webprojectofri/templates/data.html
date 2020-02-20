@@ -1,0 +1,43 @@
+﻿{% extends "layout.html" %}
+
+{% block content %}
+
+<h1>{{ title }}.</h1>
+<h3>{{ message }}</h3>
+
+
+<p> I decide to use two different dataset to examine this topic and help users to undersend the phenomena</p>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12" style="background-color: lightskyblue">
+            <p>Text1</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3" style="background-color: lightcoral">
+            <p>Text2</p>
+        </div>
+        <div class="col-lg-9" style="background-color: coral">
+            <p>Text3</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4" style="background-color: lightgoldenrodyellow">
+            <p>Text4</p>
+        </div>
+        <div class="col-lg-4" style="background-color: lightgreen">
+            <p>Text5</p>
+        </div>
+        <div class="col-lg-4" style="background-color: green">
+            <p>
+                <a href="{{ url_for('dataset1') }}">Dataset</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
