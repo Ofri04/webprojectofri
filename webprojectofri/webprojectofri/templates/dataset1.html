@@ -4,7 +4,143 @@
 
 <h2>{{ title }}.</h2>
 <h3>{{ message }}</h3>
+<h4>
+    A list of all accidental drug overdose deaths in Connecticut 
+    from 2012 to 2018. The "Y" value below the various substance 
+    columns indicates that a specific substance was discovered.
+    The data is derived from an investigation by the Office of the
+    Chief Medical Examiner, which includes the toxicity report, 
+    death certificate and scene test.
+
+</h4>
+
+
+<table style="width:100%">
+    <tr>
+        <th>Age</th>
+        <td>the Age of the person who died</td>
+    </tr>
+
+    <tr>
+        <th rowspan="1">Date:</th>
+        <td>The date of the death. </td>
+    </tr>
+
+    <tr>
+        <th>DeathCounty:</th>
+        <td>The country that he died.</td>
+    </tr>
+
+    <tr>
+        <th>
+            Cocaine:
+        </th>
+        <td>The drug he used</td>
+    </tr>
+    <tr>
+        <th>
+            Heroin:
+        </th>
+        <td>The drug he used</td>
+    </tr>
+    <tr>
+        <th>
+            Fentanyl:
+        </th>
+        <td>The drug he used</td>
+    </tr>
+    <tr>
+        <th>
+            FentanylAnalogue:
+        </th>
+        <td>The drug he used</td>
+    </tr>
+    <tr>
+        <th>
+            Oxycodone:
+        </th>
+        <td>The drug he used</td>
+    </tr>
+    <tr>
+        <th>
+            Oxymorphone:
+        </th>
+        <td>The drug he used</td>
+    </tr>
+    <tr>
+        <th>
+            Ethanol:
+        </th>
+        <td>The drug he used</td>
+    </tr>
+    <tr>
+        <th>
+            Hydrocodone:
+        </th>
+        <td>The drug he used</td>
+    </tr>
+    <tr>
+        <th>
+            Benzodiazepine:
+        </th>
+        <td>The drug he used</td>
+    </tr>
+    <tr>
+        <th>
+            Methadone:
+        </th>
+        <td>The drug he used</td>
+    </tr>
+    <tr>
+        <th>
+            Amphet:
+        </th>
+        <td>The drug he used</td>
+    </tr>
+    <tr>
+        <th>
+            Tramad:
+        </th>
+        <td>The drug he used</td>
+    </tr>
+    <tr>
+        <th>
+            Morphine_NotHeroin:
+        </th>
+        <td>The drug he used</td>
+    </tr>
+    <tr>
+        <th>
+            Hydromorphone:
+        </th>
+        <td>The drug he used</td>
+    </tr>
+    <tr>
+        <th>
+            Other:
+        </th>
+        <td>The drug he used</td>
+    </tr>
+    
+
+
+    <tr>
+        <th>
+            COD:
+        </th>
+        <td>Cause of death. how he died</td>
+    </tr>
+</table>
+<button data-toggle="collapse" data-target="#demo">data frame</button>
+
+
+<div id="demo" class="collapse">
+    {{ raw_data_table | safe}}
+</div>
+
 
 <p>Use this area to provide additional information.</p>
+
+
 
 {% endblock %}

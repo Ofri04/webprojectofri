@@ -9,7 +9,7 @@ from webprojectofri.Models.LocalDatabaseRoutines import create_LocalDatabaseServ
 
 
 from datetime import datetime
-from flask import render_template, redirect, request
+from   flask import render_template, redirect, request
 
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
@@ -41,7 +41,7 @@ from webprojectofri.Models.QueryFormStructure import UserRegistrationFormStructu
 
 db_Functions = create_LocalDatabaseServiceRoutines() 
 
-
+##home page
 @app.route('/')
 @app.route('/home')
 def home():
@@ -51,7 +51,7 @@ def home():
         title='Home Page',
         year=datetime.now().year,
     )
-
+##contact page
 @app.route('/contact')
 def contact():
     """Renders the contact page."""
@@ -61,15 +61,16 @@ def contact():
         year=datetime.now().year,
         message='Ofri Manor contact page'
     )
-
+##the aboout page
 @app.route('/about')
 def about():
     """Renders the about page."""
     return render_template(
         'about.html',
-        title='About',
+        title='About The Project',
         year=datetime.now().year,
-        message='Your application description page.'
+        message='Ofri Manors html project.'
+        
     )
 # -------------------------------------------------------
 # Register new user page
@@ -96,7 +97,7 @@ def Register():
         year=datetime.now().year,
         repository_name='Pandas',
         )
-
+##data frame page
 @app.route('/data')
 def data():
     """Renders the data page."""
@@ -106,12 +107,21 @@ def data():
         year=datetime.now().year,
         message='Your application description page.'
     )
-@app.route('/dataset1')
+##data set page
+@app.route('/datadet1')
 def dataset1():
-    """Renders the data page."""
+    pd.options.display.max_rows = 100
+    df = pd.read_csv(path.join(path.dirname(__file__), 'static\\Data\\dataframe.csv'))
+    
+    raw_data_table = df.to_html(classes = 'table table-hover')
+    
+    """Renders the dataset page."""
     return render_template(
         'dataset1.html',
-        title='This is data set 1',
+        title='This is Data Set 1 page',
+        raw_data_table = raw_data_table,
         year=datetime.now().year,
-        message='This is data set 1'
-    )
+        message='In this page we will display the datasets we are going to use in order to explain the dataset'
+        
+        )
+
