@@ -29,6 +29,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="runserver.py" />
+    <Compile Include="webprojectofri\Models\class1.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="webprojectofri\Models\LocalDatabaseRoutines.py">
       <SubType>Code</SubType>
     </Compile>
@@ -78,8 +81,10 @@
     <Content Include="webprojectofri\static\scripts\_references.js" />
     <Content Include="webprojectofri\templates\about.html" />
     <Content Include="webprojectofri\templates\contact.html" />
+    <Content Include="webprojectofri\templates\DataQuery.html" />
     <Content Include="webprojectofri\templates\index.html" />
     <Content Include="webprojectofri\templates\layout.html" />
+    <Content Include="webprojectofri\templates\login.html" />
     <Content Include="webprojectofri\templates\register.html" />
     <Content Include="webprojectofri\templates\data.html" />
     <Content Include="webprojectofri\templates\dataset1.html" />

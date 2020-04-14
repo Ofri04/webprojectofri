@@ -125,3 +125,34 @@ def dataset1():
         
         )
 
+
+# -------------------------------------------------------
+# Login page
+# This page is the filter before the data analysis
+# -------------------------------------------------------
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginFormStructure(request.form)
+
+    if (request.method == 'POST' and form.validate()):
+        if (db_Functions.IsLoginGood(form.username.data, form.password.data)):
+            flash('Login approved!')
+            #return redirect('<were to go if login is good!')
+        else:
+            flash('Error in - Username and/or password')
+   
+    return render_template(
+        'login.html', 
+        form=form, 
+        title='Login to data analysis',
+        year=datetime.now().year,
+        )
+@app.route('/')
+@app.route('/DataQuery')
+def DataQuery():
+    """Renders the DataQuery page."""
+    return render_template(
+        'DataQuery.html',
+        title='DataQuery Page',
+        year=datetime.now().year,
+    )
