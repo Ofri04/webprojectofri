@@ -93,18 +93,26 @@
                 </td>
             </tr>
             <tr>
+
                 <td>
-                    {{ form.start_date.label }}
+
+                    <div class="form-group  required">
+                       <label class="control-label" for="start_date">{{ form.start_date.label }}</label>
+                       
+                       <input class="form-control" id="start_date" name="start_date" required="" type="date" value={{ form.start_date }} >
+
+                    </div>
+
+                                      
                 </td>
-                <td>
-                    {{ form.start_date }}
-                </td>
+
                 <td>
                     {% if form.start_date.errors %}
                     <ul class="text-danger">{% for error in form.FirstName.errors %}<li>{{ error }}</li>{% endfor %}</ul>
                     {% endif %}
                 </td>
             </tr>
+
             <tr>
                 <td>
                     {{ form.end_date.label }}

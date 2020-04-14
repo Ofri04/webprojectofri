@@ -160,7 +160,13 @@ def login():
 def DataQuery():
     """Renders the DataQuery page."""
     form = DataQueryFormStructure(request.form)
-    
+     
+    #set default values of datetime, to indicate ALL the rows
+    form.start_date.data = "12/05/2020"
+    #df_ufo.Event_Time.min()
+    #form.end_date.data = df_ufo.Event_Time.max()
+
+
     #Set the list of states from the data set of all US states
     form.states.choices = get_states_choices() 
    
