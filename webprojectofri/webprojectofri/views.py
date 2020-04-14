@@ -33,9 +33,17 @@ from wtforms import TextField, TextAreaField, SubmitField, SelectField, DateFiel
 from wtforms import ValidationError
 
 
-from webprojectofri.Models.QueryFormStructure import QueryFormStructure 
-from webprojectofri.Models.QueryFormStructure import LoginFormStructure 
-from webprojectofri.Models.QueryFormStructure import UserRegistrationFormStructure 
+from webprojectofri.Models.FormStructure import DataQueryFormStructure 
+from webprojectofri.Models.FormStructure import LoginFormStructure 
+from webprojectofri.Models.FormStructure import UserRegistrationFormStructure 
+
+
+from webprojectofri.Models.DataQuery     import plot_to_img
+from webprojectofri.Models.DataQuery     import Get_NormelizedUFOTestmonials
+from webprojectofri.Models.DataQuery     import get_states_choices
+from webprojectofri.Models.DataQuery     import Get_NormelizedWeatherDataset
+from webprojectofri.Models.DataQuery     import MergeUFO_and_Weather_datasets
+from webprojectofri.Models.DataQuery     import MakeDF_ReadyFor_Analysis
 
 ###from DemoFormProject.Models.LocalDatabaseRoutines import IsUserExist, IsLoginGood, AddNewUser 
 
@@ -151,8 +159,23 @@ def login():
 @app.route('/DataQuery')
 def DataQuery():
     """Renders the DataQuery page."""
+    form = DataQueryFormStructure(request.form)
+    
+    #Set the list of states from the data set of all US states
+    form.states.choices = get_states_choices() 
+   
+    if (request.method == 'POST' ):
+
+       states = form.states.data
+       start_date = form.start_date.data
+       end_date = form.end_date.data
+       kind = form.kind.data
+
     return render_template(
         'DataQuery.html',
         title='DataQuery Page',
+        form=form,
         year=datetime.now().year,
+        message='Please enter the parameters you choose, to analyze the database'
+
     )

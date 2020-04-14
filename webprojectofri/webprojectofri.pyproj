@@ -29,13 +29,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="runserver.py" />
-    <Compile Include="webprojectofri\Models\class1.py">
+    <Compile Include="webprojectofri\Models\DataQuery.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="webprojectofri\Models\LocalDatabaseRoutines.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="webprojectofri\Models\QueryFormStructure.py">
+    <Compile Include="webprojectofri\Models\FormStructure.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="webprojectofri\__init__.py" />

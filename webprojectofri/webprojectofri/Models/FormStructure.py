@@ -5,26 +5,16 @@
 from datetime import datetime
 
 from flask_wtf import FlaskForm
+from wtforms import Form
+
 from wtforms import StringField, SubmitField
 from wtforms import Form, BooleanField, PasswordField
+from wtforms import TextField, TextAreaField, SelectField, SelectMultipleField, DateField, DateTimeField
 from wtforms import TextField, TextAreaField, SelectField, DateField
 from wtforms import validators, ValidationError
 
 from wtforms.validators import DataRequired
 ### ----------------------------------------------------------- ###
-
-
-
-
-## This class have the fields that are part of the Country-Capital demonstration
-## You can see two fields:
-##   the 'name' field - will be used to get the country name
-##   the 'submit' button - the button the user will press to have the 
-##                         form be "posted" (sent to the server for process)
-class QueryFormStructure(FlaskForm):
-    name   = StringField('Country Name:  ' , validators = [DataRequired()])
-    submit = SubmitField('Submit')
-
 
 
 
@@ -75,5 +65,12 @@ class UserRegistrationFormStructure(FlaskForm):
 #class DataParametersFormStructure(FlaskForm):
 #    
 #    submit = SubmitField('Submit')
+
+class DataQueryFormStructure(FlaskForm):
+    states = SelectMultipleField('Select Multiple:', validators = [DataRequired] )
+    start_date = DateField('Start Date:' , format='%Y-%m-%d' , validators = [DataRequired])
+    end_date   = DateField('End   Date:' , format='%Y-%m-%d' , validators = [DataRequired])
+    kind = SelectField('Chart Kind' , validators = [DataRequired] , choices=[('line', 'line'), ('bar', 'bar')])
+    submit = SubmitField('Submit')
 
 
