@@ -162,7 +162,7 @@ def DataQuery():
     form = DataQueryFormStructure(request.form)
      
     #set default values of datetime, to indicate ALL the rows
-    form.start_date.data = "12/05/2020"
+    #form.start_date.data = "12/05/2020"
     #df_ufo.Event_Time.min()
     #form.end_date.data = df_ufo.Event_Time.max()
 
