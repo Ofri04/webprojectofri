@@ -145,7 +145,7 @@ def login():
     if (request.method == 'POST' and form.validate()):
         if (db_Functions.IsLoginGood(form.username.data, form.password.data)):
             flash('Login approved!')
-            #return redirect('<were to go if login is good!')
+            return redirect('<were to go if login is good!')
         else:
             flash('Error in - Username and/or password')
    
@@ -170,12 +170,48 @@ def DataQuery():
     #Set the list of states from the data set of all US states
     form.states.choices = get_states_choices() 
    
-    if (request.method == 'POST' ):
+  
+    if (request.method == 'POST' and formvalidate() ):
+        states = form.states.data
+        start_date = form.start_date.data
+        end_date = form.end_date.data
+        kind = form.kind.data
 
-       states = form.states.data
-       start_date = form.start_date.data
-       end_date = form.end_date.data
-       kind = form.kind.data
+        df = pd.read_csv(path.join(path.dirname(__file__),"static\\Data\\dataframe.csv" , low_memory = False)
+
+        drug_list=[
+            'Morphine_NotHeroin','Tramad','Amphet','Methadone','Benzodiazepine','Hydrocodone',
+            'Ethanol','Oxymorphone','Oxycodone','FentanylAnalogue','Fentanyl','Cocaine',
+            'Heroin','Hydromorphone'
+
+                   ]
+        l=['Date','Race','ResidenceState']
+        coulumn_list=l+drug_list
+        df=df[coulumn_list]
+        b=df.columns.tolist()
+        s=df['Race']
+        year='2018'
+        df=df[df['Date'].notna()]
+        df=df[df['Date'].str.contains(year)]
+        ResidenceState='CT'
+        df=df[df['ResidenceState'].notna()]
+        df=df[df['ResidenceState'].str.contains(ResidenceState)]
+        df=df.drop(['Date','ResidenceState','Race','Other'],1)
+        df=df.fillna(value=0)
+        df.shape[0]
+        for drug in drug_list:
+           df[drug]=df[drug].replace('Y',1)
+           df[drug]=df[drug].replace('YES',1)
+           df[drug]=df[drug].astype(int)
+        t=[ ]
+        for drug in drug_list: 
+           t.append(df[drug].sum())
+           print(drug)
+           print(df[drug].sum())
+
+        df1=pd.DataFrame(index=drug_list)
+        df1['Death']=t
+        df1.plot(kind='pie',y='Death')
 
     return render_template(
         'DataQuery.html',

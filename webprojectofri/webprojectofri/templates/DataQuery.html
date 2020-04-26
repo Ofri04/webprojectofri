@@ -16,63 +16,8 @@
 <br />
 <br />
 <br />
-<h7>Select drug that used:</h7>
-
-<div class="custom-select" style="width:200px;">
-    <select>
-
-        <option value="1">Hydromorphone</option>
-        <option value="2">Morphine_NotHeroin</option>
-        <option value="3">Tramad</option>
-        <option value="4">Amphet</option>
-        <option value="5">Methadone</option>
-        <option value="6">Benzodiazepine</option>
-        <option value="7">Hydrocodone</option>
-        <option value="8">Ethanol</option>
-        <option value="9">Oxymorphone</option>
-        <option value="10">Oxycodone</option>
-        <option value="11">FentanylAnalogue</option>
-        <option value="12">Fentanyl</option>
-        <option value="9">Cocaine</option>
-        <option value="10">Heroin</option>
-        <option value="11">Hydromorphone</option>
-        <option value="12">Other</option>
-    </select>
-</div>
-<h7>Select recident state:</h7>
-<div class="custom-select" style="width:200px;">
-    <select>
 
 
-        <option value="1">nan</option>
-        <option value="2">NY</option>
-        <option value="3">CT</option>
-        <option value="4">PA</option>
-        <option value="5">MA</option>
-        <option value="6">FL</option>
-        <option value="7">TN</option>
-        <option value="8">GA</option>
-        <option value="9">CA</option>
-        <option value="10">ME</option>
-        <option value="11">OK</option>
-        <option value="12">VT</option>
-        <option value="1">MI</option>
-        <option value="2">RI</option>
-        <option value="3">NH</option>
-        <option value="4">NJ</option>
-        <option value="5">SD</option>
-        <option value="6">OH</option>
-        <option value="7">IL</option>
-        <option value="8">SC</option>
-        <option value="9">TX</option>
-        <option value="10">AL</option>
-        <option value="11">NC</option>
-        <option value="12">MD</option>
-        <option value="10">CO</option>
-        <option value="11">LA</option>
-        <option value="12">MN</option>
-    </select>
-</div>
 <div class="row" ">
 
     <form method=post>
@@ -97,13 +42,13 @@
                 <td>
 
                     <div class="form-group  required">
-                       <label class="control-label" for="start_date">{{ form.start_date.label }}</label>
-                       
-                       <input class="form-control" id="start_date" name="start_date" required="" type="date" value="2017-01-31" >
+                        <label class="control-label" for="start_date">{{ form.start_date.label }}</label>
+
+                        <input class="form-control" id="start_date" name="start_date" required="" type="date" value="2017-01-31">
 
                     </div>
 
-                                      
+
                 </td>
 
                 <td>
@@ -115,7 +60,7 @@
 
             <tr>
                 <td>
-                
+
                     <div class="form-group  required">
                         <label class="control-label" for="start_date">
                             {{ form.end_date.label }}
@@ -158,14 +103,5 @@
 
 
 
-<style>
-    td, tr, table {
-        font-size: 22px
-    }
 
-    h2 {
-        position: relative;
-        left: 450px;
-    }
-</style>
     {% endblock %}
