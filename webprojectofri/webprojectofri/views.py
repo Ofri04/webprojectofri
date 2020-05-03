@@ -148,7 +148,8 @@ def login():
     if (request.method == 'POST' and form.validate()):
         if (db_Functions.IsLoginGood(form.username.data, form.password.data)):
             flash('Login approved!')
-            return redirect('<were to go if login is good!')
+
+            return redirect('DataQuery') 
         else:
             flash('Error in - Username and/or password')
    
@@ -180,9 +181,7 @@ def DataQuery():
   #  if ((request.method == 'POST' and form.validate()) or True):
     if (True):
         states = form.states.data
-        start_date = form.start_date.data
-        end_date = form.end_date.data
-        kind = form.kind.data
+        
 
         df = pd.read_csv(path.join(path.dirname(__file__),"static\\Data\\dataframe.csv" ))
         drug_list = ['Morphine_NotHeroin','Tramad','Amphet','Methadone','Benzodiazepine','Hydrocodone','Ethanol','Oxymorphone','FentanylAnalogue','Oxycodone','Fentanyl','Cocaine','Heroin','Hydromorphone']
@@ -249,10 +248,10 @@ def DataQuery():
            img_under_construction = '/static/imgs/under_construction.png',
            chart = chart,
            form=form,
-           height = "250" ,
-           width = "600",
+           height = "220" ,
+           width = "420",
            year=datetime.now().year,
            chartyear = chartyear,
-           message='Please enter the parameters you choose, to analyze the database'
+           message='Please enter the state you want to choose, to analyze the database '
 
     )
