@@ -160,7 +160,7 @@ def login():
         )
 
 @app.route('/')
-@app.route('/DataQuery')
+@app.route('/DataQuery',methods=['GET', 'POST'])
 def DataQuery():
     """Renders the DataQuery page."""
     form = DataQueryFormStructure(request.form)
@@ -173,8 +173,12 @@ def DataQuery():
 
     #Set the list of states from the data set of all US states
     form.states.choices = get_states_choices() 
+    print(form.states.data)
+    print(form.states.choices)
+    #print (dict(form.states.choices).get(form.states.data))
 
-    if ((request.method == 'POST' and formvalidate()) or True):
+  #  if ((request.method == 'POST' and form.validate()) or True):
+    if (True):
         states = form.states.data
         start_date = form.start_date.data
         end_date = form.end_date.data
@@ -193,15 +197,16 @@ def DataQuery():
         for index in range(0,4):
             #year='2018'
             year = str(chartyear[index])
-            print (year)
             df2=df[df['Date'].notna()]
             df2=df2[df2['Date'].str.contains(year)]
-            print (df2)
+            
+            if len(form.states.data)!=0 :
 
-            #ResidenceState='CT'
-            #df2=df2[df2['ResidenceState'].notna()]
-            #df2=df2[df2['ResidenceState'].str.contains(ResidenceState)]
-            df2=df2.drop(['Date','ResidenceState','Race'],1)
+               ResidenceState=form.states.data[0]
+               print(ResidenceState)
+               df2=df2[df2['ResidenceState'].notna()]
+               df2=df2[df2['ResidenceState'].str.contains(ResidenceState)]
+               df2=df2.drop(['Date','ResidenceState','Race'],1)
             
 
             df2=df2.fillna(value=0)
