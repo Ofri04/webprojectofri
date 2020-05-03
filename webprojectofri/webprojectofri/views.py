@@ -187,36 +187,57 @@ def DataQuery():
         df=df[coulumn_list]
         b=df.columns.tolist()
         s=df['Race']
-        year='2018'
-        df=df[df['Date'].notna()]
-        df=df[df['Date'].str.contains(year)]
-        ResidenceState='CT'
-        df=df[df['ResidenceState'].notna()]
-        df=df[df['ResidenceState'].str.contains(ResidenceState)]
-        df=df.drop(['Date','ResidenceState','Race'],1)
-        df=df.fillna(value=0)
-        df.shape[0]
-        for drug in drug_list:
-           df[drug]=df[drug].replace('Y',1)
-           df[drug]=df[drug].replace('YES',1)
-           df[drug]=df[drug].astype(int)
-        t=[ ]
-        for drug in drug_list: 
-           t.append(df[drug].sum())
-           #print(drug)
-           #print(df[drug].sum())
 
-        df1=pd.DataFrame(index=drug_list)
-        df1['Death']=t
-
-        print(df1)
-        df1.plot(kind='pie',y='Death')
-        
-        fig = plt.figure()
-        ax = fig.add_subplot()
-        df1.plot(ax = ax , kind='pie',y='Death', figsize=(10,10))
-        chart = plot_to_img(fig)
         chartyear = [2015,2016,2017,2018]
+        chart=[ ]
+        for index in range(0,4):
+            #year='2018'
+            year = str(chartyear[index])
+            print (year)
+            df2=df[df['Date'].notna()]
+            df2=df2[df2['Date'].str.contains(year)]
+            print (df2)
+
+            #ResidenceState='CT'
+            #df2=df2[df2['ResidenceState'].notna()]
+            #df2=df2[df2['ResidenceState'].str.contains(ResidenceState)]
+            df2=df2.drop(['Date','ResidenceState','Race'],1)
+            
+
+            df2=df2.fillna(value=0)
+            df2.shape[0]
+            
+            for drug in drug_list:
+               df2[drug]=df2[drug].replace('Y',1)
+               df2[drug]=df2[drug].replace('YES',1)
+               df2[drug]=df2[drug].replace('Y-A',1)
+               df2[drug]=df2[drug].replace('NO RX BUT STRAWS',1)
+               df2[drug]=df2[drug].replace('STOLE MEDS',1)
+               df2[drug]=df2[drug].replace('PCP NEG',0)
+
+           
+               try:
+                   df2[drug]=df2[drug].astype(int)
+               except:
+                   print ('ERROR')
+                   for x in df2[drug]:
+                       if x!=1 and x!=0:
+                          print (x)
+
+            
+            t=[ ]
+            for drug in drug_list: 
+               t.append(df2[drug].sum())
+           
+            df1=pd.DataFrame(index=drug_list)
+            df1['Death']=t
+
+        
+            fig = plt.figure()
+            ax = fig.add_subplot()
+            df1.plot(ax = ax , kind='pie',y='Death', figsize=(10,10))
+            tempchart = plot_to_img(fig)
+            chart.append(tempchart)            
 
         return render_template(
            'DataQuery.html',
