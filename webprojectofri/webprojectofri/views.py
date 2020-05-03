@@ -7,6 +7,9 @@ from flask import render_template
 from webprojectofri import app
 from webprojectofri.Models.LocalDatabaseRoutines import create_LocalDatabaseServiceRoutines
 
+import matplotlib.pyplot as plt
+from   matplotlib.figure import Figure
+
 
 from datetime import datetime
 from   flask import render_template, redirect, request
@@ -155,6 +158,7 @@ def login():
         title='Login to data analysis',
         year=datetime.now().year,
         )
+
 @app.route('/')
 @app.route('/DataQuery')
 def DataQuery():
@@ -169,24 +173,17 @@ def DataQuery():
 
     #Set the list of states from the data set of all US states
     form.states.choices = get_states_choices() 
-   
-  
-    if (request.method == 'POST' and formvalidate() ):
+
+    if ((request.method == 'POST' and formvalidate()) or True):
         states = form.states.data
         start_date = form.start_date.data
         end_date = form.end_date.data
         kind = form.kind.data
 
-        df = pd.read_csv(path.join(path.dirname(__file__),"static\\Data\\dataframe.csv" , low_memory = False)
-
-        drug_list=[
-            'Morphine_NotHeroin','Tramad','Amphet','Methadone','Benzodiazepine','Hydrocodone',
-            'Ethanol','Oxymorphone','Oxycodone','FentanylAnalogue','Fentanyl','Cocaine',
-            'Heroin','Hydromorphone'
-
-                   ]
+        df = pd.read_csv(path.join(path.dirname(__file__),"static\\Data\\dataframe.csv" ))
+        drug_list = ['Morphine_NotHeroin','Tramad','Amphet','Methadone','Benzodiazepine','Hydrocodone','Ethanol','Oxymorphone','FentanylAnalogue','Oxycodone','Fentanyl','Cocaine','Heroin','Hydromorphone']
         l=['Date','Race','ResidenceState']
-        coulumn_list=l+drug_list
+        coulumn_list= l + drug_list
         df=df[coulumn_list]
         b=df.columns.tolist()
         s=df['Race']
@@ -196,7 +193,7 @@ def DataQuery():
         ResidenceState='CT'
         df=df[df['ResidenceState'].notna()]
         df=df[df['ResidenceState'].str.contains(ResidenceState)]
-        df=df.drop(['Date','ResidenceState','Race','Other'],1)
+        df=df.drop(['Date','ResidenceState','Race'],1)
         df=df.fillna(value=0)
         df.shape[0]
         for drug in drug_list:
@@ -206,18 +203,30 @@ def DataQuery():
         t=[ ]
         for drug in drug_list: 
            t.append(df[drug].sum())
-           print(drug)
-           print(df[drug].sum())
+           #print(drug)
+           #print(df[drug].sum())
 
         df1=pd.DataFrame(index=drug_list)
         df1['Death']=t
-        df1.plot(kind='pie',y='Death')
 
-    return render_template(
-        'DataQuery.html',
-        title='DataQuery Page',
-        form=form,
-        year=datetime.now().year,
-        message='Please enter the parameters you choose, to analyze the database'
+        print(df1)
+        df1.plot(kind='pie',y='Death')
+        
+        fig = plt.figure()
+        ax = fig.add_subplot()
+        df1.plot(ax = ax , kind='pie',y='Death', figsize=(10,10))
+        chart = plot_to_img(fig)
+        chartyear = [2015,2016,2017,2018]
+
+        return render_template(
+           'DataQuery.html',
+           img_under_construction = '/static/imgs/under_construction.png',
+           chart = chart,
+           form=form,
+           height = "250" ,
+           width = "600",
+           year=datetime.now().year,
+           chartyear = chartyear,
+           message='Please enter the parameters you choose, to analyze the database'
 
     )
