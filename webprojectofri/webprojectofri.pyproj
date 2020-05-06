@@ -57,8 +57,6 @@
     <Content Include="webprojectofri\static\content\bootstrap.min.css" />
     <Content Include="webprojectofri\static\content\site.css" />
     <Content Include="webprojectofri\static\Data\dataframe.csv" />
-    <Content Include="webprojectofri\static\Data\datafortheproject.txt" />
-    <Content Include="webprojectofri\static\Data\MyData2.csv" />
     <Content Include="webprojectofri\static\Data\users.csv" />
     <Content Include="webprojectofri\static\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="webprojectofri\static\fonts\glyphicons-halflings-regular.svg" />

@@ -14,7 +14,6 @@ from wtforms import TextField, TextAreaField, SelectField, DateField
 from wtforms import validators, ValidationError
 
 from wtforms.validators import DataRequired
-### ----------------------------------------------------------- ###
 
 
 
@@ -68,9 +67,6 @@ class UserRegistrationFormStructure(FlaskForm):
 
 class DataQueryFormStructure(FlaskForm):
     states = SelectMultipleField('Select :', validators = [DataRequired] )
-    #start_date = DateField('Start Date:' , format='%Y-%m-%d' , validators = [DataRequired])
-    #end_date   = DateField('End   Date:' , format='%Y-%m-%d' , validators = [DataRequired])
-    #kind = SelectField('Chart Kind' , validators = [DataRequired] , choices=[('line', 'line'), ('bar', 'bar')])
     submit = SubmitField('Submit')
 
 
