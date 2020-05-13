@@ -1,6 +1,4 @@
-"""
-Routes and views for the flask application.
-"""
+
 
 from datetime import datetime
 from flask import render_template
@@ -9,7 +7,6 @@ from webprojectofri.Models.LocalDatabaseRoutines import create_LocalDatabaseServ
 
 import matplotlib.pyplot as plt
 from   matplotlib.figure import Figure
-
 
 from datetime import datetime
 from   flask import render_template, redirect, request
@@ -48,7 +45,7 @@ from webprojectofri.Models.DataQuery     import Get_NormelizedWeatherDataset
 from webprojectofri.Models.DataQuery     import MergeUFO_and_Weather_datasets
 from webprojectofri.Models.DataQuery     import MakeDF_ReadyFor_Analysis
 
-###from DemoFormProject.Models.LocalDatabaseRoutines import IsUserExist, IsLoginGood, AddNewUser 
+###from webprojectofri.Models.LocalDatabaseRoutines import IsUserExist, IsLoginGood, AddNewUser 
 
 db_Functions = create_LocalDatabaseServiceRoutines() 
 
@@ -72,7 +69,7 @@ def contact():
         year=datetime.now().year,
         message='Ofri Manor contact page'
     )
-##the aboout page
+## aboout page
 @app.route('/about')
 def about():
     """Renders the about page."""
@@ -96,7 +93,7 @@ def Register():
             db_table = ""
 
             flash('Thanks for registering new user - '+ form.FirstName.data + " " + form.LastName.data )
-            # Here you should put what to do (or were to go) if registration was good
+            
         else:
             flash('Error: User with this Username already exist ! - '+ form.username.data)
             form = UserRegistrationFormStructure(request.form)
@@ -108,7 +105,7 @@ def Register():
         year=datetime.now().year,
         repository_name='Pandas',
         )
-##data frame page
+##data model page
 @app.route('/data')
 def data():
     """Renders the data page."""
@@ -159,24 +156,15 @@ def login():
         title='Login to data analysis',
         year=datetime.now().year,
         )
-
+## data query page
 @app.route('/')
 @app.route('/DataQuery',methods=['GET', 'POST'])
 def DataQuery():
     """Renders the DataQuery page."""
     form = DataQueryFormStructure(request.form)
-     
-    #set default values of datetime, to indicate ALL the rows
-    #form.start_date.data = "12/05/2020"
-    #df_ufo.Event_Time.min()
-    #form.end_date.data = df_ufo.Event_Time.max()
-
 
     #Set the list of states from the data set of all US states
     form.states.choices = get_states_choices() 
-    print(form.states.data)
-    print(form.states.choices)
-    #print (dict(form.states.choices).get(form.states.data))
 
   #  if ((request.method == 'POST' and form.validate()) or True):
     if (True):
@@ -194,7 +182,6 @@ def DataQuery():
         chartyear = [2015,2016,2017,2018]
         chart=[ ]
         for index in range(0,4):
-            #year='2018'
             year = str(chartyear[index])
             df2=df[df['Date'].notna()]
             df2=df2[df2['Date'].str.contains(year)]
